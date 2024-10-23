@@ -21,7 +21,7 @@ adb shell pm grant io.github.cnpog.gamingview android.permission.WRITE_SECURE_SE
 If you're unable to install the APK directly, you can also install it using ADB with the following command:
 
 ```bash
-adb shell pm grant io.github.cnpog.gamingview android.permission.WRITE_SECURE_SETTINGS
+adb install --bypass-low-target-sdk-block ZuiAdvancedGamingView.apk
 ```
 
 This command allows you to bypass the low target SDK block and successfully install the application.
