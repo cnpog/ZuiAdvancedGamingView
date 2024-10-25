@@ -1,3 +1,4 @@
+// GamingviewFragment.kt
 package io.github.cnpog.gamingview.ui.gamingview
 
 import android.os.Bundle
@@ -10,22 +11,22 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import io.github.cnpog.gamingview.R
 import io.github.cnpog.gamingview.databinding.FragmentGamingviewBinding
 import io.github.cnpog.gamingview.settings.WideVisionWriter
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 
 class GamingviewFragment : Fragment() {
 
     private var _binding: FragmentGamingviewBinding? = null
     private val binding get() = _binding!!
     private lateinit var gamingViewModel: GamingviewViewModel
+    private lateinit var appListAdapter: AppListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,13 +46,18 @@ class GamingviewFragment : Fragment() {
     private fun setupRecyclerView() {
         val recyclerView: RecyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(true) // Improves performance if RecyclerView size doesn't change
 
-        gamingViewModel.installedApps.observe(viewLifecycleOwner, Observer { appList ->
-            val adapter = AppListAdapter(requireContext(), appList) { appName ->
-                showAppDetails(appName)
-            }
-            recyclerView.adapter = adapter
-        })
+        // Initialize the adapter once
+        appListAdapter = AppListAdapter(requireContext()) { appName ->
+            showAppDetails(appName)
+        }
+        recyclerView.adapter = appListAdapter
+
+        // Observe the LiveData and update the adapter's data
+        gamingViewModel.installedApps.observe(viewLifecycleOwner) { appList ->
+            appListAdapter.updateData(appList)
+        }
     }
 
     private fun loadInstalledApps() {
@@ -72,7 +78,6 @@ class GamingviewFragment : Fragment() {
             tab.text = when (position) {
                 0 -> "MOBA"
                 1 -> "Shooter"
-                2 -> "Vertical"
                 else -> null
             }
         }.attach()
@@ -88,17 +93,20 @@ class GamingviewFragment : Fragment() {
             val currentTabPosition = viewPager.currentItem
 
             if (isAllRadioGroupsSelected(dialogView, currentTabPosition)) {
-                val selectedOptions = collectSelectedOptions(dialogView) // Modify to accept dialogView
+                val selectedOptions = collectSelectedOptions(dialogView)
                 val wideVisionWriter = WideVisionWriter(requireContext())
                 wideVisionWriter.processSelectedOptions(selectedOptions, appName)
                 dialog.dismiss()
             } else {
-                Toast.makeText(requireContext(), "Please select an option from each group in the current tab.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Please select an option from each group in the current tab.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
         dialog.show()
     }
-
 
     private fun isAllRadioGroupsSelected(dialogView: View, tabPosition: Int): Boolean {
         return when (tabPosition) {
@@ -106,85 +114,60 @@ class GamingviewFragment : Fragment() {
                 val tabOneRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
                 val tabOneRadioGroupBottom: RadioGroup = dialogView.findViewById(R.id.radio_group_bottom)
 
-                if (tabOneRadioGroupTop.checkedRadioButtonId == -1) {
-                    return false
-                }
-
-                if (tabOneRadioGroupBottom.checkedRadioButtonId == -1) {
-                    return false
-                }
-                true
+                tabOneRadioGroupTop.checkedRadioButtonId != -1 &&
+                        tabOneRadioGroupBottom.checkedRadioButtonId != -1
             }
             1 -> {
                 val tabTwoRadioGroup: RadioGroup = dialogView.findViewById(R.id.radio_group)
                 tabTwoRadioGroup.checkedRadioButtonId != -1
             }
-            2 -> {
-                val tabThreeRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
-                val tabThreeRadioGroupBottom: RadioGroup = dialogView.findViewById(R.id.radio_group_bottom)
-
-                if (tabThreeRadioGroupTop.checkedRadioButtonId == -1) {
-                    return false
-                }
-
-                if (tabThreeRadioGroupBottom.checkedRadioButtonId == -1) {
-                    return false
-                }
-                true
-            }
             else -> false
         }
     }
 
-
     private fun collectSelectedOptions(dialogView: View): Map<String, String> {
         val selectedOptions = mutableMapOf<String, String>()
-        val currentTabPosition = dialogView.findViewById<ViewPager2>(R.id.view_pager).currentItem
+        val viewPager: ViewPager2 = dialogView.findViewById(R.id.view_pager)
+        val currentTabPosition = viewPager.currentItem
 
-        if (currentTabPosition == 0) {
-            val tabOneRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
-            val selectedTopId = tabOneRadioGroupTop.checkedRadioButtonId
-            if (selectedTopId != -1) {
-                val selectedTopButton = tabOneRadioGroupTop.findViewById<RadioButton>(selectedTopId)
-                selectedOptions["position"] = selectedTopButton.tag.toString()
-            }
+        when (currentTabPosition) {
+            0 -> {
+                val tabOneRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
+                val selectedTopId = tabOneRadioGroupTop.checkedRadioButtonId
+                if (selectedTopId != -1) {
+                    val selectedTopButton =
+                        tabOneRadioGroupTop.findViewById<RadioButton>(selectedTopId)
+                    selectedOptions["position"] = selectedTopButton.tag.toString()
+                }
 
-            val tabOneRadioGroupBottom: RadioGroup = dialogView.findViewById(R.id.radio_group_bottom)
-            val selectedBottomId = tabOneRadioGroupBottom.checkedRadioButtonId
-            if (selectedBottomId != -1) {
-                val selectedBottomButton = tabOneRadioGroupBottom.findViewById<RadioButton>(selectedBottomId)
-                selectedOptions["mode"] = selectedBottomButton.tag.toString()
+                val tabOneRadioGroupBottom: RadioGroup =
+                    dialogView.findViewById(R.id.radio_group_bottom)
+                val selectedBottomId = tabOneRadioGroupBottom.checkedRadioButtonId
+                if (selectedBottomId != -1) {
+                    val selectedBottomButton =
+                        tabOneRadioGroupBottom.findViewById<RadioButton>(selectedBottomId)
+                    selectedOptions["mode"] = selectedBottomButton.tag.toString()
+                }
             }
-        } else if (currentTabPosition == 1) {
-            val tabTwoRadioGroup: RadioGroup = dialogView.findViewById(R.id.radio_group)
-            val selectedSecondTabId = tabTwoRadioGroup.checkedRadioButtonId
-            if (selectedSecondTabId != -1) {
-                val selectedSecondButton = tabTwoRadioGroup.findViewById<RadioButton>(selectedSecondTabId)
-                selectedOptions["mode"] = selectedSecondButton.tag.toString()
-            }
-        }else if (currentTabPosition == 2) {
-            val tabThreeRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
-            val selectedTopId = tabThreeRadioGroupTop.checkedRadioButtonId
-            if (selectedTopId != -1) {
-                val selectedTopButton = tabThreeRadioGroupTop.findViewById<RadioButton>(selectedTopId)
-                selectedOptions["position"] = selectedTopButton.tag.toString()
-            }
-
-            val tabThreeRadioGroupBottom: RadioGroup = dialogView.findViewById(R.id.radio_group_bottom)
-            val selectedBottomId = tabThreeRadioGroupBottom.checkedRadioButtonId
-            if (selectedBottomId != -1) {
-                val selectedBottomButton = tabThreeRadioGroupBottom.findViewById<RadioButton>(selectedBottomId)
-                selectedOptions["mode"] = selectedBottomButton.tag.toString()
+            1 -> {
+                val tabTwoRadioGroup: RadioGroup = dialogView.findViewById(R.id.radio_group)
+                val selectedSecondTabId = tabTwoRadioGroup.checkedRadioButtonId
+                if (selectedSecondTabId != -1) {
+                    val selectedSecondButton =
+                        tabTwoRadioGroup.findViewById<RadioButton>(selectedSecondTabId)
+                    selectedOptions["mode"] = selectedSecondButton.tag.toString()
+                }
             }
         }
 
         return selectedOptions
     }
 
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        if (::appListAdapter.isInitialized) {
+            appListAdapter.clear()
+        }
     }
 }
