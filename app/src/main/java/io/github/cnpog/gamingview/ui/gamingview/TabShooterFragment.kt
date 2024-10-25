@@ -8,6 +8,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import io.github.cnpog.gamingview.R
+import io.github.cnpog.gamingview.settings.Mode
 
 class TabShooterFragment : Fragment() {
 
@@ -24,7 +25,7 @@ class TabShooterFragment : Fragment() {
         val radioGroup: RadioGroup = view.findViewById(R.id.radio_group)
 
         // Add buttons to the RadioGroup
-        radioGroup.addView(RadioButton(context).apply { text = "Normal"; tag = "" })
-        radioGroup.addView(RadioButton(context).apply { text = "Deep"; tag = "1.2" })
+        radioGroup.addView(RadioButton(context).apply { text = Mode.NORMAL.description; tag = Mode.NORMAL.code })
+        radioGroup.addView(RadioButton(context).apply { text = Mode.DEEP.description; tag = Mode.DEEP.code })
     }
 }

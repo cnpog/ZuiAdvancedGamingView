@@ -31,41 +31,44 @@ class GamingviewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        gamingViewModel = ViewModelProvider(this).get(GamingviewViewModel::class.java)
-
         _binding = FragmentGamingviewBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // Initialize ViewModel with a Factory to pass Context
+        val factory = GamingviewViewModelFactory(requireContext())
+        gamingViewModel = ViewModelProvider(this, factory)[GamingviewViewModel::class.java]
+
         setupRecyclerView()
-        loadInstalledApps()
+        gamingViewModel.loadInstalledApps()
         return root
     }
 
     private fun setupRecyclerView() {
         val recyclerView: RecyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true) // Improves performance if RecyclerView size doesn't change
+        recyclerView.setHasFixedSize(true)
 
-        // Initialize the adapter once
-        appListAdapter = AppListAdapter(requireContext()) { appName ->
-            showAppDetails(appName)
+        // Initialize the adapter
+        appListAdapter = AppListAdapter(requireContext()) { appItem ->
+            showAppDetails(appItem)
         }
         recyclerView.adapter = appListAdapter
 
         // Observe the LiveData and update the adapter's data
-        gamingViewModel.installedApps.observe(viewLifecycleOwner) { appList ->
-            appListAdapter.updateData(appList)
+        gamingViewModel.installedApps.observe(viewLifecycleOwner) { installedApps ->
+            if (installedApps.isEmpty()) {
+                recyclerView.visibility = View.GONE
+            } else {
+                recyclerView.visibility = View.VISIBLE
+                appListAdapter.updateData(installedApps)
+            }
         }
     }
 
-    private fun loadInstalledApps() {
-        val packageManager = requireActivity().packageManager
-        gamingViewModel.loadInstalledApps(packageManager)
-    }
 
-    private fun showAppDetails(appName: String) {
+    private fun showAppDetails(appItem: AppItem) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_app_details, null)
         val tabLayout: TabLayout = dialogView.findViewById(R.id.tab_layout)
         val viewPager: ViewPager2 = dialogView.findViewById(R.id.view_pager)
@@ -78,13 +81,14 @@ class GamingviewFragment : Fragment() {
             tab.text = when (position) {
                 0 -> "MOBA"
                 1 -> "Shooter"
+                2 -> "Vertical"
                 else -> null
             }
         }.attach()
 
         val dialogBuilder = AlertDialog.Builder(requireContext())
             .setView(dialogView)
-            .setTitle(appName)
+            .setTitle(appItem.applicationInfo.packageName)
             .setNegativeButton("Close") { dialog, _ -> dialog.dismiss() }
 
         val dialog = dialogBuilder.create()
@@ -95,7 +99,8 @@ class GamingviewFragment : Fragment() {
             if (isAllRadioGroupsSelected(dialogView, currentTabPosition)) {
                 val selectedOptions = collectSelectedOptions(dialogView)
                 val wideVisionWriter = WideVisionWriter(requireContext())
-                wideVisionWriter.processSelectedOptions(selectedOptions, appName)
+                wideVisionWriter.processSelectedOptions(selectedOptions, appItem.applicationInfo.packageName)
+                gamingViewModel.loadInstalledApps()
                 dialog.dismiss()
             } else {
                 Toast.makeText(
@@ -120,6 +125,13 @@ class GamingviewFragment : Fragment() {
             1 -> {
                 val tabTwoRadioGroup: RadioGroup = dialogView.findViewById(R.id.radio_group)
                 tabTwoRadioGroup.checkedRadioButtonId != -1
+            }
+            2 -> {
+                val tabThreeRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
+                val tabThreeRadioGroupBottom: RadioGroup = dialogView.findViewById(R.id.radio_group_bottom)
+
+                tabThreeRadioGroupTop.checkedRadioButtonId != -1 &&
+                        tabThreeRadioGroupBottom.checkedRadioButtonId != -1
             }
             else -> false
         }
@@ -156,6 +168,24 @@ class GamingviewFragment : Fragment() {
                     val selectedSecondButton =
                         tabTwoRadioGroup.findViewById<RadioButton>(selectedSecondTabId)
                     selectedOptions["mode"] = selectedSecondButton.tag.toString()
+                }
+            }
+            2 -> {
+                val tabThreeRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
+                val selectedTopId = tabThreeRadioGroupTop.checkedRadioButtonId
+                if (selectedTopId != -1) {
+                    val selectedTopButton =
+                        tabThreeRadioGroupTop.findViewById<RadioButton>(selectedTopId)
+                    selectedOptions["position"] = selectedTopButton.tag.toString()
+                }
+
+                val tabThreeRadioGroupBottom: RadioGroup =
+                    dialogView.findViewById(R.id.radio_group_bottom)
+                val selectedBottomId = tabThreeRadioGroupBottom.checkedRadioButtonId
+                if (selectedBottomId != -1) {
+                    val selectedBottomButton =
+                        tabThreeRadioGroupBottom.findViewById<RadioButton>(selectedBottomId)
+                    selectedOptions["mode"] = selectedBottomButton.tag.toString()
                 }
             }
         }

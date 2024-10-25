@@ -9,6 +9,8 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import io.github.cnpog.gamingview.R
+import io.github.cnpog.gamingview.settings.Mode
+import io.github.cnpog.gamingview.settings.Position
 
 class TabMobaFragment : Fragment() {
 
@@ -32,13 +34,13 @@ class TabMobaFragment : Fragment() {
         val radioGroupBottom: RadioGroup = view.findViewById(R.id.radio_group_bottom)
 
         // Add buttons to the top RadioGroup
-        radioGroupTop.addView(RadioButton(context).apply { text = "Center"; tag = "1"})
-        radioGroupTop.addView(RadioButton(context).apply { text = "Bottom"; tag = "2"})
+        radioGroupTop.addView(RadioButton(context).apply { text = Position.CENTER.description; tag = Position.CENTER.code})
+        radioGroupTop.addView(RadioButton(context).apply { text = Position.BOTTOM.description; tag = Position.BOTTOM.code})
 
         // Add buttons to the bottom RadioGroup
-        radioGroupBottom.addView(RadioButton(context).apply { text = "Normal"; tag = "" })
-        radioGroupBottom.addView(RadioButton(context).apply { text = "Wide"; tag = "2.1" })
-        radioGroupBottom.addView(RadioButton(context).apply { text = "EXTREME"; tag = "2.4" })
-        radioGroupBottom.addView(RadioButton(context).apply { text = "16:9"; tag = "1.777" })
+        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.NORMAL.description; tag = Mode.NORMAL.code })
+        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.WIDE.description; tag = Mode.WIDE.code })
+        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.EXTREME.description; tag = Mode.EXTREME.code })
+        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.SIXTEEN_NINE.description; tag =  Mode.SIXTEEN_NINE.code })
     }
 }
