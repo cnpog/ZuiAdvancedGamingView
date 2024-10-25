@@ -1,8 +1,15 @@
 # ZuiAdvancedGamingView
 
-## Warning
+## Screenshots
 
-This App will only work on Lenovo ZUI and was tested on ZUI 16.0.336.
+[<img src="docs/images/screenshot1.png" width=399>](docs/images/screenshot1.png)
+[<img src="docs/images/screenshot2.png" width=399>](docs/images/screenshot2.png)
+[<img src="docs/images/screenshot3.png" width=399>](docs/images/screenshot3.png)
+[<img src="docs/images/screenshot4.png" width=399>](docs/images/screenshot4.png)
+
+> [!warning]
+> <b>This App will only work on Lenovo ZUI and was tested on ZUI 16.0.336 (CN).</b>
+> <b>Not every mode works for every game.</b>
 
 ## Features
 
