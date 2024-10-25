@@ -24,7 +24,7 @@ class TabShooterFragment : Fragment() {
         val radioGroup: RadioGroup = view.findViewById(R.id.radio_group)
 
         // Add buttons to the RadioGroup
-        radioGroup.addView(RadioButton(context).apply { text = "Normal" })
+        radioGroup.addView(RadioButton(context).apply { text = "Normal"; tag = "" })
         radioGroup.addView(RadioButton(context).apply { text = "Deep"; tag = "1.2" })
     }
 }

@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import io.github.cnpog.gamingview.R
 
-class TabMobaFragment : Fragment() {
+class TabVerticalFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,8 +37,7 @@ class TabMobaFragment : Fragment() {
 
         // Add buttons to the bottom RadioGroup
         radioGroupBottom.addView(RadioButton(context).apply { text = "Normal"; tag = "" })
-        radioGroupBottom.addView(RadioButton(context).apply { text = "Wide"; tag = "2.1" })
-        radioGroupBottom.addView(RadioButton(context).apply { text = "EXTREME"; tag = "2.4" })
-        radioGroupBottom.addView(RadioButton(context).apply { text = "16:9"; tag = "1.777" })
+        radioGroupBottom.addView(RadioButton(context).apply { text = "Wide"; tag = "1.6" })
+        radioGroupBottom.addView(RadioButton(context).apply { text = "EXTREME"; tag = "1.8" })
     }
 }

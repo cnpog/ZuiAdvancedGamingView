@@ -72,6 +72,7 @@ class GamingviewFragment : Fragment() {
             tab.text = when (position) {
                 0 -> "MOBA"
                 1 -> "Shooter"
+                2 -> "Vertical"
                 else -> null
             }
         }.attach()
@@ -118,6 +119,19 @@ class GamingviewFragment : Fragment() {
                 val tabTwoRadioGroup: RadioGroup = dialogView.findViewById(R.id.radio_group)
                 tabTwoRadioGroup.checkedRadioButtonId != -1
             }
+            2 -> {
+                val tabThreeRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
+                val tabThreeRadioGroupBottom: RadioGroup = dialogView.findViewById(R.id.radio_group_bottom)
+
+                if (tabThreeRadioGroupTop.checkedRadioButtonId == -1) {
+                    return false
+                }
+
+                if (tabThreeRadioGroupBottom.checkedRadioButtonId == -1) {
+                    return false
+                }
+                true
+            }
             else -> false
         }
     }
@@ -147,6 +161,20 @@ class GamingviewFragment : Fragment() {
             if (selectedSecondTabId != -1) {
                 val selectedSecondButton = tabTwoRadioGroup.findViewById<RadioButton>(selectedSecondTabId)
                 selectedOptions["mode"] = selectedSecondButton.tag.toString()
+            }
+        }else if (currentTabPosition == 2) {
+            val tabThreeRadioGroupTop: RadioGroup = dialogView.findViewById(R.id.radio_group_top)
+            val selectedTopId = tabThreeRadioGroupTop.checkedRadioButtonId
+            if (selectedTopId != -1) {
+                val selectedTopButton = tabThreeRadioGroupTop.findViewById<RadioButton>(selectedTopId)
+                selectedOptions["position"] = selectedTopButton.tag.toString()
+            }
+
+            val tabThreeRadioGroupBottom: RadioGroup = dialogView.findViewById(R.id.radio_group_bottom)
+            val selectedBottomId = tabThreeRadioGroupBottom.checkedRadioButtonId
+            if (selectedBottomId != -1) {
+                val selectedBottomButton = tabThreeRadioGroupBottom.findViewById<RadioButton>(selectedBottomId)
+                selectedOptions["mode"] = selectedBottomButton.tag.toString()
             }
         }
 
