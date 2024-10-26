@@ -7,19 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.collection.LruCache
 import androidx.recyclerview.widget.RecyclerView
 import io.github.cnpog.gamingview.R
 import kotlinx.coroutines.*
 
 class AppListAdapter(
     private val context: Context,
+    private val viewModel: GamingviewViewModel,
     private val onItemClick: (AppItem) -> Unit
 ) : RecyclerView.Adapter<AppListAdapter.AppViewHolder>() {
 
     private var appList: List<AppItem> = listOf()
-    private val iconCache: LruCache<String, Drawable> = LruCache(100) // Adjust cache size as needed
     private val coroutineScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+
+    init {
+        setHasStableIds(true)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return appList[position].applicationInfo.packageName.hashCode().toLong()
+    }
 
     inner class AppViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val appIcon: ImageView = itemView.findViewById(R.id.app_icon)
@@ -33,25 +40,27 @@ class AppListAdapter(
                 "${context.getString(R.string.position)}: ${it.getDescription(context)}"
             } ?: ""
             appMode.text = appItem.mode?.let {
-                "${context.getString(R.string.position)}: ${it.getDescription(context)}"
+                "${context.getString(R.string.mode)}: ${it.getDescription(context)}"
             } ?: ""
 
-            // Check if the icon is cached
-            val cachedIcon = iconCache[appItem.applicationInfo.packageName]
+            appIcon.visibility = View.INVISIBLE
+
+            val packageName = appItem.applicationInfo.packageName
+            val cachedIcon = viewModel.iconCache[packageName]
             if (cachedIcon != null) {
                 appIcon.setImageDrawable(cachedIcon)
+                appIcon.visibility = View.VISIBLE
             } else {
-                // Load icon asynchronously
                 coroutineScope.launch {
                     val icon = withContext(Dispatchers.IO) {
                         appItem.applicationInfo.loadIcon(context.packageManager)
                     }
-                    iconCache.put(appItem.applicationInfo.packageName, icon)
+                    viewModel.iconCache.put(packageName, icon)
                     appIcon.setImageDrawable(icon)
+                    appIcon.visibility = View.VISIBLE
                 }
             }
 
-            // Set click listener
             itemView.setOnClickListener { onItemClick(appItem) }
         }
     }
@@ -67,14 +76,13 @@ class AppListAdapter(
 
     override fun getItemCount(): Int = appList.size
 
-    // Method to update the data
     fun updateData(newAppList: List<AppItem>) {
         appList = newAppList
         notifyDataSetChanged()
     }
 
-    // Clean up coroutine scope to prevent memory leaks
     fun clear() {
         coroutineScope.cancel()
     }
 }
+

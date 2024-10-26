@@ -12,9 +12,9 @@
     <string name="tab_header_shooter">Shooter</string>
     <string name="tab_header_vertical">Thẳng đứng</string>
     <string name="close">Đóng</string>
+    <string name="reset">Đặt lại</string>
     <string name="please_select_option">Vui lòng chọn một tùy chọn từ mỗi nhóm trong tab hiện tại.</string>
     <string name="please_restart_game">Khởi động lại trò chơi để các thay đổi có hiệu lực</string>
-    <string name="mode_normal">Normal</string>
     <string name="mode_wide">Wide</string>
     <string name="mode_extreme">Extreme</string>
     <string name="mode_sixteen_nine">16:9</string>

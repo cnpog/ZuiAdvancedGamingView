@@ -12,9 +12,9 @@
     <string name="tab_header_shooter">射击游戏</string>
     <string name="tab_header_vertical">垂直</string>
     <string name="close">关闭</string>
+    <string name="reset">重置</string>
     <string name="please_select_option">请从当前标签中的每个组中选择一个选项。</string>
     <string name="please_restart_game">重新启动游戏以使更改生效</string>
-    <string name="mode_normal">Normal</string>
     <string name="mode_wide">Wide</string>
     <string name="mode_extreme">Extreme</string>
     <string name="mode_sixteen_nine">16:9</string>

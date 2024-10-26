@@ -12,9 +12,9 @@
     <string name="tab_header_shooter">Shooter</string>
     <string name="tab_header_vertical">Dikey</string>
     <string name="close">Kapat</string>
+    <string name="reset">Sıfırla</string>
     <string name="please_select_option">Lütfen mevcut sekmedeki her gruptan bir seçenek seçin.</string>
     <string name="please_restart_game">Değişikliklerin etkili olması için oyunu yeniden başlatın</string>
-    <string name="mode_normal">Normal</string>
     <string name="mode_wide">Wide</string>
     <string name="mode_extreme">Extreme</string>
     <string name="mode_sixteen_nine">16:9</string>

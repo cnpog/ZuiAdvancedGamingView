@@ -25,14 +25,13 @@ enum class Position(val code: String, @StringRes val descriptionRes: Int) {
         fun fromCode(code: String): Position? = entries.find { it.code == code }
     }
 }
-enum class Mode(val code: String, @StringRes val descriptionRes: Int, val priority: Int) {
-    NORMAL("", R.string.mode_normal, 2),
-    WIDE("2.1", R.string.mode_wide, 1),
-    EXTREME("2.4", R.string.mode_extreme,1),
-    SIXTEEN_NINE("1.777", R.string.mode_sixteen_nine,1),
-    DEEP("1.2", R.string.mode_deep,1),
-    VERTICAL_WIDE("1.6", R.string.mode_vertical_wide,1),
-    EXTREME_VERTICAL_WIDE("1.8", R.string.mode_extreme_vertical_wide,1);
+enum class Mode(val code: String, @StringRes val descriptionRes: Int, val priority: Int, val tabIndex: Int) {
+    WIDE("2.1", R.string.mode_wide, 1, 0),
+    EXTREME("2.4", R.string.mode_extreme,1, 0),
+    SIXTEEN_NINE("1.777", R.string.mode_sixteen_nine,1, 0),
+    DEEP("1.2", R.string.mode_deep,1, 1),
+    VERTICAL_WIDE("1.6", R.string.mode_vertical_wide,1, 2),
+    EXTREME_VERTICAL_WIDE("1.8", R.string.mode_extreme_vertical_wide,1, 2);
 
     fun getDescription(context: Context): String {
         return context.getString(descriptionRes)
@@ -56,13 +55,12 @@ class WideVisionWriter(private val context: Context) {
         }
         val settingsName = "zui_ultra_wide_" + appPkgName.replace(".", "_")
         val positionCode = selectedOptions["position"] ?: Position.CENTER.code
-        val modeCode = selectedOptions["mode"] ?: Mode.NORMAL.code
+        val modeCode = selectedOptions["mode"] ?: Mode.SIXTEEN_NINE.code
 
         val position = Position.fromCode(positionCode) ?: Position.CENTER
-        val mode = Mode.fromCode(modeCode) ?: Mode.NORMAL
+        val mode = Mode.fromCode(modeCode) ?: Mode.SIXTEEN_NINE
 
         val settingsValue = when (mode) {
-            Mode.NORMAL -> ""
             Mode.DEEP -> "1:${Mode.DEEP.code}"
             else -> "${position.code}:${mode.code}"
         }
@@ -72,7 +70,12 @@ class WideVisionWriter(private val context: Context) {
         Toast.makeText(context, context.getString(R.string.please_restart_game), Toast.LENGTH_SHORT).show()
     }
 
-    // New suspend function to get settings
+    fun resetSettings(appPkgName: String) {
+        val settingsName = "zui_ultra_wide_" + appPkgName.replace(".", "_")
+        Settings.Global.putString(context.contentResolver, settingsName, "")
+        Toast.makeText(context, context.getString(R.string.please_restart_game), Toast.LENGTH_SHORT).show()
+    }
+
     suspend fun getSettings(appPkgName: String): AppSettings? = withContext(Dispatchers.IO) {
         val enabledWideFieldPackagesString = Settings.System.getString(context.contentResolver, "enable_wide_field_packages") ?: ""
         val enabledWideFieldPackages = enabledWideFieldPackagesString.split(":").map { it.trim() }.filter { it.isNotBlank() }
@@ -83,8 +86,8 @@ class WideVisionWriter(private val context: Context) {
             val settings = settingsString.split(":").map { it.trim() }.filter { it.isNotBlank() }
 
             if (settings.size == 2) {
-                val position = Position.fromCode(settings[0]) ?: Position.CENTER
-                val mode = Mode.fromCode(settings[1]) ?: Mode.NORMAL
+                val position = Position.fromCode(settings[0]) ?: Position.BOTTOM
+                val mode = Mode.fromCode(settings[1]) ?: Mode.SIXTEEN_NINE
                 return@withContext AppSettings(position, mode)
             } else {
                 Log.w("WideVisionWriter", "Malformed settings for $appPkgName: '$settingsString'")

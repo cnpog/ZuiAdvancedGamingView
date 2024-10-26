@@ -12,9 +12,9 @@
     <string name="tab_header_shooter">Shooter</string>
     <string name="tab_header_vertical">Vertical</string>
     <string name="close">Fermer</string>
+    <string name="reset">Réinitialiser</string>
     <string name="please_select_option">Veuillez sélectionner une option de chaque groupe dans l\'onglet actuel.</string>
     <string name="please_restart_game">Redémarrez le jeu pour que les modifications prennent effet</string>
-    <string name="mode_normal">Normal</string>
     <string name="mode_wide">Wide</string>
     <string name="mode_extreme">Extreme</string>
     <string name="mode_sixteen_nine">16:9</string>

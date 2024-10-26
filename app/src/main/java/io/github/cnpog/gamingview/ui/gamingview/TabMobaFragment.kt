@@ -23,24 +23,31 @@ class TabMobaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize the TextViews for headlines
-        val topHeadline: TextView = view.findViewById(R.id.top_headline)
-        val bottomHeadline: TextView = view.findViewById(R.id.bottom_headline)
+        val topHeadline: TextView = view.findViewById(R.id.tab_moba_top_headline)
+        val bottomHeadline: TextView = view.findViewById(R.id.tab_moba_bottom_headline)
         topHeadline.text = getString(R.string.game_position)
         bottomHeadline.text = getString(R.string.select_fov)
 
-        // Initialize RadioGroups
-        val radioGroupTop: RadioGroup = view.findViewById(R.id.radio_group_top)
-        val radioGroupBottom: RadioGroup = view.findViewById(R.id.radio_group_bottom)
+        val radioGroupTop: RadioGroup = view.findViewById(R.id.tab_moba_radio_group_top)
+        val radioGroupBottom: RadioGroup = view.findViewById(R.id.tab_moba_radio_group_bottom)
 
-        // Add buttons to the top RadioGroup
         radioGroupTop.addView(RadioButton(context).apply { text = Position.CENTER.getDescription(context); tag = Position.CENTER.code})
         radioGroupTop.addView(RadioButton(context).apply { text = Position.BOTTOM.getDescription(context); tag = Position.BOTTOM.code})
 
-        // Add buttons to the bottom RadioGroup
-        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.NORMAL.getDescription(context); tag = Mode.NORMAL.code })
         radioGroupBottom.addView(RadioButton(context).apply { text = Mode.WIDE.getDescription(context); tag = Mode.WIDE.code })
         radioGroupBottom.addView(RadioButton(context).apply { text = Mode.EXTREME.getDescription(context); tag = Mode.EXTREME.code })
         radioGroupBottom.addView(RadioButton(context).apply { text = Mode.SIXTEEN_NINE.getDescription(context); tag =  Mode.SIXTEEN_NINE.code })
+
+        val mode = arguments?.getSerializable("mode", Mode::class.java)
+        val position = arguments?.getSerializable("position", Position::class.java)
+        mode?.let {
+            val modeButton = radioGroupBottom.findViewWithTag<RadioButton>(it.code)
+            if (modeButton != null) {
+                radioGroupBottom.check(modeButton.id)
+                position?.let { pos ->
+                    radioGroupTop.findViewWithTag<RadioButton>(pos.code)?.let { radioGroupTop.check(it.id) }
+                }
+            }
+        }
     }
 }

@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">ZUI Advanced Gaming View</string>
     <string name="mode">Mode</string>
-    <string name="mode_normal">Normal</string>
     <string name="mode_wide">Wide</string>
     <string name="mode_extreme">Extreme</string>
     <string name="mode_sixteen_nine">16:9</string>
@@ -20,6 +19,7 @@
     <string name="tab_header_shooter">Шутер</string>
     <string name="tab_header_vertical">Вертикальный</string>
     <string name="close">Закрыть</string>
+    <string name="reset">Сбросить</string>
     <string name="please_select_option">Пожалуйста, выберите опцию из каждой группы в текущей вкладке.</string>
     <string name="please_restart_game">Перезапустите игру, чтобы изменения вступили в силу.</string>
     <string name="action_language">Язык</string>

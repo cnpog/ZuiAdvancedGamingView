@@ -8,6 +8,7 @@
 [<img src="images/screenshot2.png" width=399>](images/screenshot2.png)
 [<img src="images/screenshot3.png" width=399>](images/screenshot3.png)
 [<img src="images/screenshot4.png" width=399>](images/screenshot4.png)
+[<img src="images/screenshot5.png" width=399>](images/screenshot5.png)
 
 > [!warning]
 > <b>Это приложение будет работать только на Lenovo ZUI и протестировано на ZUI 16.0.336 (CN).</b>

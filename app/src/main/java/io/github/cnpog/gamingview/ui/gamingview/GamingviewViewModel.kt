@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.util.Log
+import androidx.collection.LruCache
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +14,7 @@ import io.github.cnpog.gamingview.settings.WideVisionWriter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
+import android.graphics.drawable.Drawable
 class GamingviewViewModel(
     private val context: Context,
     private val wideVisionWriter: WideVisionWriter
@@ -21,6 +22,8 @@ class GamingviewViewModel(
 
     private val _installedApps = MutableLiveData<List<AppItem>>()
     val installedApps: LiveData<List<AppItem>> = _installedApps
+
+    val iconCache: LruCache<String, Drawable> = LruCache(100)
 
     fun loadInstalledApps() {
         viewModelScope.launch {

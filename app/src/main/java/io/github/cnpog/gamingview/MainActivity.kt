@@ -6,10 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import io.github.cnpog.gamingview.databinding.ActivityMainBinding
 import io.github.cnpog.gamingview.utils.LocaleHelper

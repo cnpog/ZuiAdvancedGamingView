@@ -7,7 +7,7 @@ Read this document in other languages (gpt translated): [Deutsch](docs/README.de
 [<img src="docs/images/screenshot2.png" width=399>](docs/images/screenshot2.png)
 [<img src="docs/images/screenshot3.png" width=399>](docs/images/screenshot3.png)
 [<img src="docs/images/screenshot4.png" width=399>](docs/images/screenshot4.png)
-
+[<img src="docs/images/screenshot5.png" width=399>](docs/images/screenshot5.png)
 > [!warning]
 > <b>This App will only work on Lenovo ZUI and was tested on ZUI 16.0.336 (CN).</b>
 > <b>Not every mode works for every game.</b>
@@ -43,3 +43,36 @@ Thank you for your support, and enjoy using the app!
 ## Credits
 
 Special thanks to [cuongmaz](https://xdaforums.com/m/cuongmaz.12936472/#about) for the technical information
+
+## Game Screenshots
+If anyone has screenshots to show the advantages, let me know.
+## MOBA
+### Wide
+| Center                                      | Bottom                                      |
+|---------------------------------------------|---------------------------------------------|
+| ![Center](docs/images/moba_center_wide.png) | ![Bottom](docs/images/moba_bottom_wide.png) |
+
+### Extreme
+| Center                                         | Bottom                                         |
+|------------------------------------------------|------------------------------------------------|
+| ![Center](docs/images/moba_center_extreme.png) | ![Bottom](docs/images/moba_bottom_extreme.png) |
+
+### 16:9
+| Center                                              | Bottom                                              |
+|-----------------------------------------------------|-----------------------------------------------------|
+| ![Center](docs/images/moba_center_sixteen_nine.png) | ![Bottom](docs/images/moba_bottom_sixteen_nine.png) |
+
+## Shooter
+### Deep
+![Deep](docs/images/shooter_deep.png)
+
+## Vertical
+### Vertical Wide
+| Center                                          | Bottom                                          |
+|-------------------------------------------------|-------------------------------------------------|
+| ![Center](docs/images/vertical_center_wide.png) | ![Bottom](docs/images/vertical_bottom_wide.png) |
+
+### Vertical Extreme
+| Center                                             | Bottom                                             |
+|----------------------------------------------------|----------------------------------------------------|
+| ![Center](docs/images/vertical_center_extreme.png) | ![Bottom](docs/images/vertical_bottom_extreme.png) |

@@ -8,6 +8,7 @@ Lesen Sie dieses Dokument in anderen Sprachen (gpt übersetzt): [Deutsch](README
 [<img src="images/screenshot2.png" width=399>](images/screenshot2.png)  
 [<img src="images/screenshot3.png" width=399>](images/screenshot3.png)  
 [<img src="images/screenshot4.png" width=399>](images/screenshot4.png)
+[<img src="images/screenshot5.png" width=399>](images/screenshot5.png)
 
 > [!warning]  
 > **Diese App funktioniert nur auf Lenovo ZUI und wurde auf ZUI 16.0.336 (CN) getestet.**  

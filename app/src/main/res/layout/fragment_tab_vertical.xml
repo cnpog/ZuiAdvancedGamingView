@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tab_moba_top_headline"
+        android:id="@+id/tab_vertical_top_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -13,13 +13,13 @@
         android:layout_marginBottom="8dp" />
 
     <RadioGroup
-        android:id="@+id/tab_moba_radio_group_top"
+        android:id="@+id/tab_vertical_radio_group_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" />
 
     <TextView
-        android:id="@+id/tab_moba_bottom_headline"
+        android:id="@+id/tab_vertical_bottom_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -28,7 +28,7 @@
         android:layout_marginBottom="8dp" />
 
     <RadioGroup
-        android:id="@+id/tab_moba_radio_group_bottom"
+        android:id="@+id/tab_vertical_radio_group_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" />
