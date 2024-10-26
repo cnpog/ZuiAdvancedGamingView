@@ -58,13 +58,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showLanguageSelectionDialog() {
-        val languages = arrayOf("English", "Deutsch", "Español", "Français", "Türkçe", "Tiếng Việt", "中文")
-        val languageCodes = arrayOf("en", "de", "es", "fr", "tr", "vi", "zh-rCN")
+        val languageMappings = listOf(
+            "English" to "en",
+            "Deutsch" to "de",
+            "Español" to "es",
+            "Français" to "fr",
+            "Русский" to "ru",
+            "Türkçe" to "tr",
+            "Tiếng Việt" to "vi",
+            "中文" to "zh-rCN"
+        )
+
+        // Extract the names for display
+        val languages = languageMappings.map { it.first }.toTypedArray()
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.action_language))
         builder.setItems(languages) { _, which ->
-            val selectedLanguageCode = languageCodes[which]
+            val selectedLanguageCode = languageMappings[which].second
             setLocale(selectedLanguageCode)
         }
         builder.show()
