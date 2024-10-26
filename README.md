@@ -1,4 +1,5 @@
 # ZuiAdvancedGamingView
+Read this document in other languages (gpt translated): [Deutsch](docs/README.de.md), [English](README.md), [Español](docs/README.es.md), [Français](docs/README.fr.md), [Русский](docs/README.ru.md), [Türkçe](docs/README.tr.md), [Tiếng Việt](docs/README.vi.md), [简体中文](docs/README.zh.md)
 
 ## Screenshots
 

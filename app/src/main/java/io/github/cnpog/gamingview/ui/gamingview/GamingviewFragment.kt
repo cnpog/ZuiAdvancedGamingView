@@ -1,4 +1,3 @@
-// GamingviewFragment.kt
 package io.github.cnpog.gamingview.ui.gamingview
 
 import android.os.Bundle
@@ -79,9 +78,9 @@ class GamingviewFragment : Fragment() {
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "MOBA"
-                1 -> "Shooter"
-                2 -> "Vertical"
+                0 -> getString(R.string.tab_header_moba)
+                1 -> getString(R.string.tab_header_shooter)
+                2 -> getString(R.string.tab_header_vertical)
                 else -> null
             }
         }.attach()
@@ -89,7 +88,7 @@ class GamingviewFragment : Fragment() {
         val dialogBuilder = AlertDialog.Builder(requireContext())
             .setView(dialogView)
             .setTitle(appItem.applicationInfo.packageName)
-            .setNegativeButton("Close") { dialog, _ -> dialog.dismiss() }
+            .setNegativeButton(getString(R.string.close)) { dialog, _ -> dialog.dismiss() }
 
         val dialog = dialogBuilder.create()
 
@@ -105,7 +104,7 @@ class GamingviewFragment : Fragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Please select an option from each group in the current tab.",
+                    getString(R.string.please_select_option),
                     Toast.LENGTH_SHORT
                 ).show()
             }

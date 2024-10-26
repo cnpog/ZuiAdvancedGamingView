@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ZUI Advanced Gaming View</string>
+    <string name="nav_item_gamingview">Gaming View</string>
+    <string name="game_position">游戏位置</string>
+    <string name="select_fov">选择视野</string>
+    <string name="position">位置</string>
+    <string name="mode">模式</string>
+    <string name="confirm">确认</string>
+    <string name="position_center">中心</string>
+    <string name="position_bottom">底部</string>
+    <string name="tab_header_moba">MOBA</string>
+    <string name="tab_header_shooter">射击游戏</string>
+    <string name="tab_header_vertical">垂直</string>
+    <string name="close">关闭</string>
+    <string name="please_select_option">请从当前标签中的每个组中选择一个选项。</string>
+    <string name="please_restart_game">重新启动游戏以使更改生效</string>
+    <string name="mode_normal">Normal</string>
+    <string name="mode_wide">Wide</string>
+    <string name="mode_extreme">Extreme</string>
+    <string name="mode_sixteen_nine">16:9</string>
+    <string name="mode_deep">Deep</string>
+    <string name="mode_vertical_wide">Vertical Wide</string>
+    <string name="mode_extreme_vertical_wide">Extreme Vertical Wide</string>
+    <string name="action_language">语言</string>
+</resources>

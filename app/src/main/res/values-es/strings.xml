@@ -1,19 +1,19 @@
 <resources>
     <string name="app_name">ZUI Advanced Gaming View</string>
     <string name="nav_item_gamingview">Gaming View</string>
-    <string name="game_position">Game Position</string>
-    <string name="select_fov">Select FoV</string>
-    <string name="position">Position</string>
-    <string name="mode">Mode</string>
-    <string name="confirm">Confirm</string>
-    <string name="position_center">Center</string>
-    <string name="position_bottom">Bottom</string>
+    <string name="game_position">Posición del juego</string>
+    <string name="select_fov">Seleccionar Campo de Visión</string>
+    <string name="position">Posición</string>
+    <string name="mode">Modo</string>
+    <string name="confirm">Confirmar</string>
+    <string name="position_center">Centro</string>
+    <string name="position_bottom">Abajo</string>
     <string name="tab_header_moba">MOBA</string>
     <string name="tab_header_shooter">Shooter</string>
     <string name="tab_header_vertical">Vertical</string>
-    <string name="close">Close</string>
-    <string name="please_select_option">Please select an option from each group in the current tab.</string>
-    <string name="please_restart_game">Restart game for changes to take effect</string>
+    <string name="close">Cerrar</string>
+    <string name="please_select_option">Por favor, selecciona una opción de cada grupo en la pestaña actual.</string>
+    <string name="please_restart_game">Reinicia el juego para que los cambios tengan efecto</string>
     <string name="mode_normal">Normal</string>
     <string name="mode_wide">Wide</string>
     <string name="mode_extreme">Extreme</string>
@@ -21,5 +21,5 @@
     <string name="mode_deep">Deep</string>
     <string name="mode_vertical_wide">Vertical Wide</string>
     <string name="mode_extreme_vertical_wide">Extreme Vertical Wide</string>
-    <string name="action_language">Language</string>
+    <string name="action_language">Idioma</string>
 </resources>

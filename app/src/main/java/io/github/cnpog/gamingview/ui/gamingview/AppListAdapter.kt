@@ -30,10 +30,10 @@ class AppListAdapter(
         fun bind(appItem: AppItem) {
             appName.text = appItem.applicationInfo.loadLabel(context.packageManager)
             appPosition.text = appItem.position?.let {
-                "Position: ${it.description}"
+                "${context.getString(R.string.position)}: ${it.getDescription(context)}"
             } ?: ""
             appMode.text = appItem.mode?.let {
-                "Mode: ${it.description}"
+                "${context.getString(R.string.position)}: ${it.getDescription(context)}"
             } ?: ""
 
             // Check if the icon is cached

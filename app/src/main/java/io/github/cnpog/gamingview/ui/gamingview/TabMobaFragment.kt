@@ -26,21 +26,21 @@ class TabMobaFragment : Fragment() {
         // Initialize the TextViews for headlines
         val topHeadline: TextView = view.findViewById(R.id.top_headline)
         val bottomHeadline: TextView = view.findViewById(R.id.bottom_headline)
-        topHeadline.text = "Game Position"
-        bottomHeadline.text = "Select FoV"
+        topHeadline.text = getString(R.string.game_position)
+        bottomHeadline.text = getString(R.string.select_fov)
 
         // Initialize RadioGroups
         val radioGroupTop: RadioGroup = view.findViewById(R.id.radio_group_top)
         val radioGroupBottom: RadioGroup = view.findViewById(R.id.radio_group_bottom)
 
         // Add buttons to the top RadioGroup
-        radioGroupTop.addView(RadioButton(context).apply { text = Position.CENTER.description; tag = Position.CENTER.code})
-        radioGroupTop.addView(RadioButton(context).apply { text = Position.BOTTOM.description; tag = Position.BOTTOM.code})
+        radioGroupTop.addView(RadioButton(context).apply { text = Position.CENTER.getDescription(context); tag = Position.CENTER.code})
+        radioGroupTop.addView(RadioButton(context).apply { text = Position.BOTTOM.getDescription(context); tag = Position.BOTTOM.code})
 
         // Add buttons to the bottom RadioGroup
-        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.NORMAL.description; tag = Mode.NORMAL.code })
-        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.WIDE.description; tag = Mode.WIDE.code })
-        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.EXTREME.description; tag = Mode.EXTREME.code })
-        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.SIXTEEN_NINE.description; tag =  Mode.SIXTEEN_NINE.code })
+        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.NORMAL.getDescription(context); tag = Mode.NORMAL.code })
+        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.WIDE.getDescription(context); tag = Mode.WIDE.code })
+        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.EXTREME.getDescription(context); tag = Mode.EXTREME.code })
+        radioGroupBottom.addView(RadioButton(context).apply { text = Mode.SIXTEEN_NINE.getDescription(context); tag =  Mode.SIXTEEN_NINE.code })
     }
 }

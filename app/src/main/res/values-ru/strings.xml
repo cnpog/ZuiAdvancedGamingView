@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ZUI Advanced Gaming View</string>
+    <string name="mode">Mode</string>
+    <string name="mode_normal">Normal</string>
+    <string name="mode_wide">Wide</string>
+    <string name="mode_extreme">Extreme</string>
+    <string name="mode_sixteen_nine">16:9</string>
+    <string name="mode_deep">Deep</string>
+    <string name="mode_vertical_wide">Vertical Wide</string>
+    <string name="mode_extreme_vertical_wide">Extreme Vertical Wide</string>
+    <string name="tab_header_moba">MOBA</string>
+    <string name="nav_item_gamingview">Игровой Вид</string>
+    <string name="game_position">Позиция Игры</string>
+    <string name="select_fov">Выберите поле зрения</string>
+    <string name="position">Позиция</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="position_center">Центр</string>
+    <string name="position_bottom">Низ</string>
+    <string name="tab_header_shooter">Шутер</string>
+    <string name="tab_header_vertical">Вертикальный</string>
+    <string name="close">Закрыть</string>
+    <string name="please_select_option">Пожалуйста, выберите опцию из каждой группы в текущей вкладке.</string>
+    <string name="please_restart_game">Перезапустите игру, чтобы изменения вступили в силу.</string>
+    <string name="action_language">Язык</string>
+</resources>

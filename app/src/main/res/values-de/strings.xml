@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ZUI Advanced Gaming View</string>
+    <string name="nav_item_gamingview">Gaming View</string>
+    <string name="game_position">Spielposition</string>
+    <string name="select_fov">FoV auswählen</string>
+    <string name="position">Position</string>
+    <string name="mode">Modus</string>
+    <string name="confirm">Bestätigen</string>
+    <string name="position_center">Zentriert</string>
+    <string name="position_bottom">Unten</string>
+    <string name="tab_header_moba">MOBA</string>
+    <string name="tab_header_shooter">Shooter</string>
+    <string name="tab_header_vertical">Vertikal</string>
+    <string name="close">Schliessen</string>
+    <string name="please_select_option">Bitte wählen Sie eine Option aus jeder Gruppe im aktuellen Tab aus.</string>
+    <string name="please_restart_game">Starten Sie das Spiel neu, damit die Änderungen wirksam werden</string>
+    <string name="mode_normal">Normal</string>
+    <string name="mode_wide">Wide</string>
+    <string name="mode_extreme">Extreme</string>
+    <string name="mode_sixteen_nine">16:9</string>
+    <string name="mode_deep">Deep</string>
+    <string name="mode_vertical_wide">Vertical Wide</string>
+    <string name="mode_extreme_vertical_wide">Extreme Vertical Wide</string>
+    <string name="action_language">Sprache</string>
+</resources>

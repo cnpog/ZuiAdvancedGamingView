@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ZUI Advanced Gaming View</string>
+    <string name="nav_item_gamingview">Gaming View</string>
+    <string name="game_position">Oyun Pozisyonu</string>
+    <string name="select_fov">FoV Seç</string>
+    <string name="position">Pozisyon</string>
+    <string name="mode">Mod</string>
+    <string name="confirm">Onayla</string>
+    <string name="position_center">Merkez</string>
+    <string name="position_bottom">Alt</string>
+    <string name="tab_header_moba">MOBA</string>
+    <string name="tab_header_shooter">Shooter</string>
+    <string name="tab_header_vertical">Dikey</string>
+    <string name="close">Kapat</string>
+    <string name="please_select_option">Lütfen mevcut sekmedeki her gruptan bir seçenek seçin.</string>
+    <string name="please_restart_game">Değişikliklerin etkili olması için oyunu yeniden başlatın</string>
+    <string name="mode_normal">Normal</string>
+    <string name="mode_wide">Wide</string>
+    <string name="mode_extreme">Extreme</string>
+    <string name="mode_sixteen_nine">16:9</string>
+    <string name="mode_deep">Deep</string>
+    <string name="mode_vertical_wide">Vertical Wide</string>
+    <string name="mode_extreme_vertical_wide">Extreme Vertical Wide</string>
+    <string name="action_language">Dil</string>
+</resources>

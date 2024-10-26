@@ -4,6 +4,8 @@ import android.content.Context
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.StringRes
+import io.github.cnpog.gamingview.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -11,22 +13,30 @@ data class AppSettings(
     val position: Position,
     val mode: Mode
 )
-enum class Position(val code: String, val description: String) {
-    CENTER("1", "Center"),
-    BOTTOM("2", "Bottom");
+enum class Position(val code: String, @StringRes val descriptionRes: Int) {
+    CENTER("1", R.string.position_center),
+    BOTTOM("2", R.string.position_bottom);
+
+    fun getDescription(context: Context): String {
+        return context.getString(descriptionRes)
+    }
 
     companion object {
-        fun fromCode(code: String): Position? = values().find { it.code == code }
+        fun fromCode(code: String): Position? = entries.find { it.code == code }
     }
 }
-enum class Mode(val code: String, val description: String, val priority: Int) {
-    NORMAL("", "Normal", 2),
-    WIDE("2.1", "Wide", 1),
-    EXTREME("2.4", "Extreme",1),
-    SIXTEEN_NINE("1.777", "16:9",1),
-    DEEP("1.2", "Deep",1),
-    VERTICAL_WIDE("1.6", "Vertical Wide",1),
-    EXTREME_VERTICAL_WIDE("1.8", "Extreme Vertical Wide",1);
+enum class Mode(val code: String, @StringRes val descriptionRes: Int, val priority: Int) {
+    NORMAL("", R.string.mode_normal, 2),
+    WIDE("2.1", R.string.mode_wide, 1),
+    EXTREME("2.4", R.string.mode_extreme,1),
+    SIXTEEN_NINE("1.777", R.string.mode_sixteen_nine,1),
+    DEEP("1.2", R.string.mode_deep,1),
+    VERTICAL_WIDE("1.6", R.string.mode_vertical_wide,1),
+    EXTREME_VERTICAL_WIDE("1.8", R.string.mode_extreme_vertical_wide,1);
+
+    fun getDescription(context: Context): String {
+        return context.getString(descriptionRes)
+    }
 
     companion object {
         fun fromCode(code: String): Mode? = entries.find { it.code == code }
@@ -59,7 +69,7 @@ class WideVisionWriter(private val context: Context) {
 
         Settings.Global.putString(context.contentResolver, settingsName, settingsValue)
 
-        Toast.makeText(context, "Restart game for changes to take effect", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context.getString(R.string.please_restart_game), Toast.LENGTH_SHORT).show()
     }
 
     // New suspend function to get settings
